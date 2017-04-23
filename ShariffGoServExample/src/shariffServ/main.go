@@ -23,14 +23,12 @@ func init() {
     }
     log.Println("Server started from:",dir)
 	
-	tpl = template.Must(template.ParseGlob("C:/Users/Paul/GoLang_WS/WebApp1/src/shariffServ/templates/*.gohtml"))
+	tpl = template.Must(template.ParseGlob("C:/Users/Paul/git/ShariffGoServ/ShariffGoServExample/src/shariffServ/templates/*.gohtml"))
 }
 
 func main() {
 	http.HandleFunc("/", idx)
-	http.HandleFunc("/about", abt)
-	http.HandleFunc("/contact", ctc)
-	http.HandleFunc("/apply", apl)
+	http.Handle("/pub/", http.StripPrefix("/pub/", http.FileServer(http.Dir("C:/Users/Paul/git/ShariffGoServ/ShariffGoServExample/src/shariffServ/pub/"))))
 	http.Handle("/favico.ico", http.NotFoundHandler())
 	http.ListenAndServe(":8080", nil)
 }
@@ -38,7 +36,7 @@ func main() {
 func idx(w http.ResponseWriter, req *http.Request) {
 	
 	data := pageData{
-		Title: "Index page",
+		Title: "Go Title",
 	}
 	
 	err := tpl.ExecuteTemplate(w, "index.gohtml", data)
@@ -48,32 +46,7 @@ func idx(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 }
-func abt(w http.ResponseWriter, req *http.Request) {
-	
-	data := pageData{
-		Title: "About page",
-	}
-	
-	err := tpl.ExecuteTemplate(w, "about.gohtml", data)
-	if err != nil {
-		log.Println(err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-}
-func ctc(w http.ResponseWriter, req *http.Request) {
-	
-	data := pageData{
-		Title: "Contact page",
-	}
-	
-	err := tpl.ExecuteTemplate(w, "contact.gohtml", data)
-	if err != nil {
-		log.Println(err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-}
+
 func apl(w http.ResponseWriter, req *http.Request) {
 	
 	data := pageData{
