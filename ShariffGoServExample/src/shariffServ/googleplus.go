@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"bytes"
+	"bytes"			//needed to formulate the JSON POST request
 )
 
 type GPlusResponse []struct {
@@ -30,7 +30,7 @@ func getGPluses(url string) int {
 	req.Header.Set("Content-Type", "application/json")
 
 	if LogOn {
-		log.Println("Requesting GPlus 1+ count:", jsonReq)
+		log.Println("Requesting GPlus 1+ count:", string(jsonReq))
 	}
 
 	client := &http.Client{}

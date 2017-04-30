@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"net/http"
+	"encoding/json" //supplies json encoding and decoding
+	"fmt"           //supplies basic formating functionality
+	"log"           //supplies basic logging capabilites
+	"net/http"      //supplies http functionality
 )
 
 type FBResponse struct {

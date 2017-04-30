@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"io/ioutil"
-	"strings"
+	"io/ioutil"			//needed parse the response into a String
+	"strings"			//needed to trim down the string to format
 )
 
 type PinterestResponse struct {
